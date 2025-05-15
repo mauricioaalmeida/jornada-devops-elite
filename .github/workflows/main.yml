@@ -12,6 +12,7 @@ jobs:
       - run: echo "Executar testes"
       - run: echo "Build da imagem Docker"
       - run: echo "Push da imagem Docker"
+      
   cd:
    runs-on: ubuntu-latest   #runner
     steps:
