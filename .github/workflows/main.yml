@@ -1,0 +1,21 @@
+name: ci-cd
+on:
+  push:
+    branches:  ["main"] # não é recomendado fazer na main, só pra testes
+  workflow_dispatch:
+  
+jobs:
+  ci:
+    runs-on: ubuntu-latest   #runner
+    steps:
+      - run: echo "obter código"
+      - run: echo "Executar testes"
+      - run: echo "Build da imagem Docker"
+      - run: echo "Push da imagem Docker"
+  cd:
+   runs-on: ubuntu-latest   #runner
+    steps:
+      - run: echo "obter código"
+      - run: echo "Executar testes"
+      - run: echo "Build da imagem Docker"
+      - run: echo "Executar o apply"
