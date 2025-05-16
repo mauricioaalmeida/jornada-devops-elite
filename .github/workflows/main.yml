@@ -9,8 +9,40 @@ jobs:
     runs-on: ubuntu-latest   #runner
     steps:
       - run: echo "obter código"
-      - run: echo "Executar testes"
-      - run: echo "Build da imagem Docker"
+      - name: Obter o código do projeto
+        uses: actions/checkout@v4
+
+      - name: Setup dp .NET core
+        uses: actions/setup-dotnet@v3.4.2
+        with:
+            dotnet-version: 8.x
+
+
+      - name: Executar testes
+        working-directory: 02-review/src/Review-Filmes.Test.Unit
+        run: dotnet test
+
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+            username: ${{ vars.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build e push da imagem Docker
+        uses: docker/build-push-actions@v6
+        with: #parametros
+          #nome da imagem
+          tags: 
+            mauricioaalmeida/maa-teste:v${{ github.run_number }} ## Nome da versão = run number do github
+            mauricioaalmeida/maa-teste:latest
+          #contexto
+          context: ./02-review/src
+          #dockerfile
+          
+          file: .02-review/srv/Review-Filmes.Web/Dockerfile
+          push: true
+          
+
       - run: echo "Push da imagem Docker"
       
   cd:
