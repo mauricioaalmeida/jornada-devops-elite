@@ -34,7 +34,7 @@ jobs:
           # nome da imagem
           tags: 
             mauricioaalmeida/maa-teste:v${{ github.run_number }}
-            mauricioaalmeida/maa-teste:latest
+            # mauricioaalmeida/maa-teste:latest
           # contexto
           context: ./02-review/src
           # dockerfile
