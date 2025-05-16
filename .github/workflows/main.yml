@@ -47,9 +47,25 @@ jobs:
       
   cd:
     needs: [ci] # só roda depois de rodar o ci
-    runs-on: ubuntu-latest   #runner
+    runs-on: ubuntu-latest   # runner
     steps:
       - run: echo "obter código"
-      - run: echo "Executar testes"
-      - run: echo "Build da imagem Docker"
+      - name: Obter o código do projeto
+        uses: actions/checkout@v4
+
+      - run: echo "configurar o kubeconfig" # Kubernet set context
+      - name: Configurar o kubeconfig
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.K8S_CONFIG }}
+
+      - name: executar o apply
+        uses: Azure/k8s-deploy@v5
+        with:
+          manifest:
+            ./02-review/k8s/deployment.yaml
+          images:
+            mauricioaalmeida/maa-teste:v${{ github.run_number }}
+      
       - run: echo "Executar o apply"
