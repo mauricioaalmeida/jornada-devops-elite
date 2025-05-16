@@ -38,11 +38,9 @@ jobs:
           # contexto
           context: ./02-review/src
           # dockerfile
-          
-          file: .02-review/srv/Review-Filmes.Web/Dockerfile
+          file: .02-review/src/Review-Filmes.Web/Dockerfile
           push: true
           
-
       - run: echo "Push da imagem Docker"
       
   cd:
