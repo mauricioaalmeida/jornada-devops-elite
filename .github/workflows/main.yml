@@ -35,7 +35,6 @@ jobs:
           tags: 
             mauricioaalmeida/maa-teste:v${{ github.run_number }} ## Nome da versão = run number do github
             mauricioaalmeida/maa-teste:latest
-          #contexto
           context: ./02-review/src
           #dockerfile
           
