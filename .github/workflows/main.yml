@@ -31,12 +31,13 @@ jobs:
       - name: Build e push da imagem Docker
         uses: docker/build-push-actions@v6
         with: #parametros
-          #nome da imagem
+          # nome da imagem
           tags: 
-            mauricioaalmeida/maa-teste:v${{ github.run_number }} ## Nome da versão = run number do github
+            mauricioaalmeida/maa-teste:v${{ github.run_number }}
             mauricioaalmeida/maa-teste:latest
+            # contexto
           context: ./02-review/src
-          #dockerfile
+          # dockerfile
           
           file: .02-review/srv/Review-Filmes.Web/Dockerfile
           push: true
